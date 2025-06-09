@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  body {
+    @apply bg-dark-purple text-white overflow-x-hidden;
+  }
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #0f0824 0%, #1a0f35 50%, #2d1b58 100%);
+  position: relative;
+}
+
+.bg-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 70% 20%,
+      rgba(128, 0, 255, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      rgba(255, 169, 163, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(168, 230, 226, 0.15) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.text-gradient-eye {
+  @apply text-turquoise;
+}
+
+.text-gradient-nemia {
+  @apply text-coral;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(10px) rotate(-1deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.purple-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 70% 30%,
+      rgba(128, 0, 255, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 169, 163, 0.2) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(168, 230, 226, 0.2) 0%,
+      transparent 60%
+    );
+  filter: blur(80px);
+  animation: pulse-glow 8s ease-in-out infinite;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.btn-primary {
+  @apply bg-dark-purple text-white py-4 px-8 rounded-full font-medium transition-all duration-300
+    hover:bg-opacity-90 hover:shadow-lg hover:shadow-purple-600/20 border border-purple-600/30
+    relative z-10;
+}
+
+.eyes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+  padding: 2rem;
+}
+
+.eye {
+  width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.eye-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    circle at 50% 40%,
+    #ffffff 0%,
+    #f5f5f5 20%,
+    #e0e0e0 35%,
+    #d4d4d4 45%,
+    #b0b0b0 65%,
+    #808080 100%
+  );
+  position: relative;
+}
+
+.eye-inner::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.pupil {
+  width: 55px;
+  height: 55px;
+  background: #000;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.1s ease-out;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.pupil-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #1a1a1a 0%,
+    #000000 40%,
+    #000000 100%
+  );
+  overflow: hidden;
+}
+
+.pupil-inner::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(62, 62, 62, 0.4) 0%,
+    transparent 60%
+  );
+}
+
+.pupil-highlight {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  top: 20%;
+  left: 20%;
+}
+
+.pupil-reflection {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  bottom: 25%;
+  right: 20%;
+}
+
+/* Noise texture */
+.bg-noise {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.15) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .eyes-container {
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .eye {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pupil {
+    width: 30px;
+    height: 30px;
+  }
+
+  .pupil-highlight {
+    width: 8px;
+    height: 8px;
+    top: 5px;
+    left: 6px;
+  }
+
+  .pupil-reflection {
+    width: 4px;
+    height: 4px;
+    bottom: 6px;
+    right: 8px;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a0b2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #64ffda 0%, #ff6b9d 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff6b9d 0%, #64ffda 100%);
+}
