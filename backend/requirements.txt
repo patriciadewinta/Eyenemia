@@ -1,0 +1,11 @@
+Flask
+Flask-Cors
+gunicorn
+numpy
+opencv-python-headless
+Pillow
+torch
+torchvision
+torchaudio
+ultralytics
+fpdf
