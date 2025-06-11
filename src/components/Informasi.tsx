@@ -38,7 +38,8 @@ const Informasi: React.FC = () => {
       { threshold: 0.2 }
     );
 
-    const section = document.getElementById("anemia-info");
+    // ===== PERUBAHAN DI SINI: menargetkan ID yang benar =====
+    const section = document.getElementById("informasi");
     if (section) {
       observer.observe(section);
     }
@@ -260,7 +261,8 @@ const Informasi: React.FC = () => {
   };
 
   return (
-    <section id="anemia-info" className="py-20 px-6 md:px-12 relative">
+    // ===== PERUBAHAN DI SINI: id diubah agar sesuai dengan tautan Navbar =====
+    <section id="informasi" className="py-20 px-6 md:px-12 relative">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -401,3 +403,4 @@ const Informasi: React.FC = () => {
 };
 
 export default Informasi;
+

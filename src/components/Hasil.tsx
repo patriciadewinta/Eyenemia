@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   CheckCircle,
   AlertTriangle,
@@ -11,41 +11,36 @@ import {
 } from "lucide-react";
 
 interface PredictionResult {
-  prediction: "anemia" | "normal";
+  prediction: "anemia" | "normal" | "Anemia" | "Normal"; // Menangani variasi output
   confidence: number;
   image: string;
 }
 
 const Hasil: React.FC = () => {
-  const [result, setResult] = useState<PredictionResult | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const result: PredictionResult | null = location.state?.result;
 
   useEffect(() => {
-    // Get result from sessionStorage
-    const storedResult = sessionStorage.getItem("predictionResult");
-    if (storedResult) {
-      setResult(JSON.parse(storedResult));
-    } else {
-      // If no result found, redirect to eye-check
+    if (!result) {
       navigate("/eye-check");
     }
-  }, [navigate]);
+  }, [result, navigate]);
 
   const handleNewCheck = () => {
-    // Clear previous result
-    sessionStorage.removeItem("predictionResult");
     navigate("/eye-check");
   };
 
   if (!result) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+        <div className="text-white text-xl">Memuat hasil...</div>
       </div>
     );
   }
 
-  const isAnemia = result.prediction === "anemia";
+  // Menyamakan format output (misal: "anemia" dan "Anemia" dianggap sama)
+  const isAnemia = result.prediction.toLowerCase() === "anemia";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-20 px-6">
@@ -96,61 +91,15 @@ const Hasil: React.FC = () => {
                 >
                   {isAnemia ? "Terindikasi Anemia" : "Normal"}
                 </h2>
-                <p className="text-white/80">
-                  Confidence: {result.confidence}%
-                </p>
               </div>
             </div>
           </div>
 
-          {/* Detailed Information */}
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Left Column - Analysis Details */}
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <h3 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
-                <Activity className="w-5 h-5 text-turquoise" />
-                <span>Detail Analisis</span>
-              </h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-white/80">Status:</span>
-                  <span
-                    className={`font-semibold ${
-                      isAnemia ? "text-red-300" : "text-green-300"
-                    }`}
-                  >
-                    {isAnemia ? "Anemia Detected" : "Normal"}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-white/80">Confidence Level:</span>
-                  <span className="text-white font-semibold">
-                    {result.confidence}%
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-white/80">Risk Level:</span>
-                  <span
-                    className={`font-semibold ${
-                      isAnemia
-                        ? result.confidence > 85
-                          ? "text-red-300"
-                          : "text-yellow-300"
-                        : "text-green-300"
-                    }`}
-                  >
-                    {isAnemia
-                      ? result.confidence > 85
-                        ? "High"
-                        : "Medium"
-                      : "Low"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
+          {/* Detailed Information & Recommendations */}
+          {/* Mengubah layout agar rekomendasi menjadi komponen utama */}
+          <div className="flex justify-center">
             {/* Right Column - Recommendations */}
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+            <div className="w-full md:w-2/3 bg-white/5 rounded-2xl p-6 border border-white/10">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
                 <Heart className="w-5 h-5 text-coral" />
                 <span>Rekomendasi</span>
@@ -199,28 +148,8 @@ const Hasil: React.FC = () => {
             </div>
           </div>
 
-          {/* Confidence Bar */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-white/80">Tingkat Kepercayaan</span>
-              <span className="text-white font-semibold">
-                {result.confidence}%
-              </span>
-            </div>
-            <div className="w-full bg-white/20 rounded-full h-3">
-              <div
-                className={`h-3 rounded-full transition-all duration-1000 ${
-                  isAnemia
-                    ? "bg-gradient-to-r from-red-500 to-red-400"
-                    : "bg-gradient-to-r from-green-500 to-green-400"
-                }`}
-                style={{ width: `${result.confidence}%` }}
-              ></div>
-            </div>
-          </div>
-
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <button
               onClick={() => navigate("/")}
               className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium transition-all duration-300 border border-white/20 flex items-center justify-center space-x-2"

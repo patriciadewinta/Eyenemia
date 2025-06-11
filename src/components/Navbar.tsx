@@ -30,12 +30,6 @@ const Navbar: React.FC = () => {
           ABOUT
         </a>
         <a
-          href="#model"
-          className="text-white font-medium tracking-widest hover:text-turquoise transition-colors"
-        >
-          MODEL
-        </a>
-        <a
           href="#informasi"
           className="text-white font-medium tracking-widest hover:text-turquoise transition-colors"
         >
