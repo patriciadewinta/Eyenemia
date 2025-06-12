@@ -309,14 +309,14 @@ const Footer: React.FC = () => {
           >
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
               <div className="text-4xl font-black text-turquoise mb-2 group-hover:scale-110 transition-transform">
-                96%
+                91%
               </div>
               <p className="text-white/80">Akurasi model kami!</p>
             </div>
 
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
               <div className="text-4xl font-black text-purple-400 mb-2 group-hover:scale-110 transition-transform">
-                {"<10s"}
+                {"<5s"}
               </div>
               <p className="text-white/80">waktu pemeriksaan</p>
             </div>
